@@ -1,7 +1,5 @@
 from functools import cmp_to_key
 import json
-from opcode import cmp_op
-import os
 
 data = json.load(open("./data.json", encoding="utf-8"))
 word_dict = {}
@@ -42,7 +40,7 @@ def compare_part_name(name1, name2):
     return -1 if name1 < name2 else 1  # 实在比不了，字典序
 
 
-def compare_names(name1, name2):
+def compare_name(name1, name2):
     surname1, personal1 = split_name(name1)
     surname2, personal2 = split_name(name2)
 
@@ -58,7 +56,7 @@ def compare_names(name1, name2):
 names = open("names.txt", encoding="utf-8").readlines()
 names = [n.strip() for n in names][::-1]
 
-key = cmp_to_key(compare_names)
+key = cmp_to_key(compare_name)
 names.sort(key=key)
 with open("out.txt","w",encoding="utf-8") as of:
     for name in names:
